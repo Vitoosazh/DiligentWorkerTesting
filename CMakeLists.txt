@@ -2,7 +2,13 @@ cmake_minimum_required(VERSION 3.28.2 FATAL_ERROR)
 
 project(DWT)
 
-add_executable(DWT src/main.cpp)
+add_executable(DWT 
+					src/main.cpp
+					src/TestWindow/TestWindow.cpp
+					src/TestWindow/TestWindow.h
+					src/TestWindow/TestWindow2.h 
+					src/TestWindow/TestWindow2.cpp)
+				
 
 add_subdirectory(external/fltk)
 
