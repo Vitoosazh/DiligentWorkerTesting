@@ -11,6 +11,15 @@ public:
     void show();
     void hide();
     static void openWindow1(Fl_Widget* widget, void* data);
+    static void openWindowTest(Fl_Widget* widget, void* data);
 };
 
+class Test{
+public:
+    Test();
+    Fl_Window* test;
+    void show();
+    void hide();
+    
+};
 #endif
