@@ -1,5 +1,5 @@
 #include "TestWindow2.h"
-#include "TestWindow.h"
+//#include "TestWindow.h"
 
 Test::Test()
 {
@@ -49,10 +49,10 @@ void Window2::openWindow1(Fl_Widget* widget, void* data) {
 
 void Window2::openWindowTest(Fl_Widget* widget, void* data) {
 
-    Window1* window2 = (Window1*)data;
+    Window1* window1 = (Window1*)data;
 
     Test test;
-    window2->hide();
+    window1->hide();
     test.show();
 }
 

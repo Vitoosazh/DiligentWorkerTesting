@@ -1,9 +1,13 @@
-#include "TestWindow.h"
+//#include "TestWindow.h"
 #include "TestWindow2.h"
 
 Fl_Color originalColor;
 Fl_Input* passwordInput;
 Fl_Window* LogInScreen;
+//Fl_Multiline_Output* output;
+std::string inputText;
+
+
 
 Window1::Window1()
 
@@ -18,7 +22,6 @@ Window1::Window1()
 
 	Fl_Button* Log = new Fl_Button(150, 150, 120, 30, "Администратор");
 	Log->callback(openLogInScreen, this);
-
 
 }
 
@@ -48,7 +51,39 @@ Menu::Menu()
 Konstuctor::Konstuctor()
 {
 	konstrucorScreen = new Fl_Window(1200, 800, "Конструктор Тестов");
+	
+	Fl_Button* textButton = new Fl_Button(150, 10, 100, 30, "Написать вопрос");
+	textButton->callback(enterText, this);
+	//output = new Fl_Multiline_Output(300, 100, 400, 200, "Display text: ");
+
 }
+
+KonstuctorAddQ::KonstuctorAddQ()
+{
+
+	questionScreen = new Fl_Window(440, 150, "Text Input and Display Example");
+	Fl_Multiline_Input* input = new Fl_Multiline_Input(100, 20, 200, 30, "Enter text: ");
+	Fl_Button* buttonSaveText = new Fl_Button(100, 60, 100, 30, "Сохранить вопрос");
+	Fl_Button* buttonCloseText = new Fl_Button(200, 60, 100, 30, "Закрыть");
+	Fl_Button* editButton = new Fl_Button(150, 150, 100, 30, "Изменить");
+	
+	buttonSaveText->callback(saveAndDisplayText, static_cast<void*>(input));
+	buttonCloseText->callback(closeText, this);
+
+	
+}
+
+
+
+
+
+void KonstuctorAddQ::saveAndDisplayText(Fl_Widget* btn, void* data) {
+
+	inputText = static_cast<Fl_Multiline_Input*>(data)->value(); // Получаем текст из Fl_Input и сохраняем его в глобальную переменную
+	//output->value(inputText.c_str()); // Отображаем текст в Fl_Output
+
+}
+
 
 void Konstuctor::show() {
 
@@ -59,6 +94,7 @@ void Konstuctor::hide()
 {
 	konstrucorScreen->hide();
 }
+
 
 void Menu::show() {
 
@@ -131,6 +167,25 @@ void Window1::hide()
 	win->hide();
 }
 
+void Window1::end()
+{
+	win->end();
+}
+
+
+
+
+
+void KonstuctorAddQ::show() {
+
+	questionScreen->show();
+	Fl::run();
+}
+void KonstuctorAddQ::hide()
+{
+	questionScreen->hide();
+}
+
 void Window1::openWindow2(Fl_Widget* widget, void* data) {
 
 	Window1* window1 = (Window1*)data;
@@ -177,3 +232,24 @@ void Menu::openResultList(Fl_Widget* widget, void* data) {
 
 }
 
+void Konstuctor::enterText(Fl_Widget* widget, void* data) {
+/*
+	Fl_Window* windowText = new Fl_Window(440, 150, "Text Input and Display Example");
+	Fl_Input* input = new Fl_Input(100, 20, 200, 30, "Enter text: ");
+	Fl_Button* saveButton = new Fl_Button(100, 60, 100, 30, "Save");
+	saveButton->callback(saveAndDisplayText, static_cast<void*>(input)); // Устанавливаем callback на кнопку сохранения 
+	windowText->end();
+	windowText->show();
+*/
+	KonstuctorAddQ questionScreen;
+	questionScreen.show();
+
+}
+
+void KonstuctorAddQ::closeText(Fl_Widget* btn, void* data) {
+
+	KonstuctorAddQ* questionScreen = (KonstuctorAddQ*)data;
+
+	questionScreen->hide();
+	
+}
